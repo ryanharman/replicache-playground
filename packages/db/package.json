@@ -1,0 +1,17 @@
+{
+  "name": "@playground/db",
+  "version": "0.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --ext .ts",
+    "clearnodemodules": "rm -rf node_modules"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.3.3"
+  }
+}
