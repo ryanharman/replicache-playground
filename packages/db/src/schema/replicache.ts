@@ -1,5 +1,5 @@
 import { bigint, char, int } from "drizzle-orm/mysql-core";
-import { timestamps, mysqlTable, space_id } from "../helpers";
+import { timestamps, mysqlTable, space_id } from "../utils/schema-helpers";
 import { relations } from "drizzle-orm";
 
 // https://doc.replicache.dev/strategies/per-space-version

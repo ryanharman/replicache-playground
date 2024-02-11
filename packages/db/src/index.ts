@@ -2,7 +2,8 @@ import "dotenv/config";
 import { drizzle } from "drizzle-orm/planetscale-serverless";
 import { connect } from "@planetscale/database";
 
-import * as schema from "./models";
+import * as schema from "./schema";
+import * as core from "./core";
 
 const connection = connect({
   host: process.env.DATABASE_HOST,
@@ -11,9 +12,9 @@ const connection = connect({
 });
 
 const db = drizzle(connection, {
-  schema: { ...schema },
+  schema,
   logger: process.env.DRIZZLE_LOG === "true",
 });
 
-export { db };
+export { db, schema, core };
 export * from "drizzle-orm";

@@ -3,6 +3,8 @@
     "/apps/web/src/data",
     "/apps/web/src/providers",
     "/apps/web/src/pages",
-    "/packages/db/src/models"
+    "/packages/db/src/schema",
+    "/packages/db/src/core",
+    "/packages/db/src/utils"
   ]
 }

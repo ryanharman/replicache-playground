@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { mysqlTable, timestamps, id, space_id } from "../helpers";
+import { mysqlTable, timestamps, id, space_id } from "../utils/schema-helpers";
 import { text, boolean } from "drizzle-orm/mysql-core";
 import { replicache_space } from "./replicache";
 
