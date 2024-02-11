@@ -2,6 +2,7 @@
   "exportall.config.folderListener": [
     "/apps/web/src/data",
     "/apps/web/src/providers",
-    "/apps/web/src/pages"
+    "/apps/web/src/pages",
+    "/packages/db/src/models"
   ]
 }

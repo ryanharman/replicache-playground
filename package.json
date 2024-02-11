@@ -6,6 +6,8 @@
     "dev": "turbo dev",
     "dev:web": "turbo dev --web",
     "dev:api": "turbo dev --api",
+    "db:generate": "turbo db:generate",
+    "db:push": "turbo db:push",
     "type-check": "turbo type-check",
     "lint": "turbo lint",
     "clearnodemodules": "turbo clearnodemodules"

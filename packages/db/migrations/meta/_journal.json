@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1707661607908,
+      "tag": "0000_dashing_squadron_sinister",
+      "breakpoints": true
+    }
+  ]
+}

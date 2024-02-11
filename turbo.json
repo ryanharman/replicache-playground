@@ -1,5 +1,6 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env"],
   "pipeline": {
     "dev": {
       "cache": false,
@@ -11,8 +12,13 @@
     "test": {},
     "lint": {},
     "type-check": {},
+    "db:generate": {},
+    "db:push": {
+      "dependsOn": ["^db:push", "^db:generate"]
+    },
     "clearnodemodules": {
       "dependsOn": ["^clearnodemodules"]
     }
-  }
+  },
+  "globalEnv": ["DATABASE_HOST", "DATABASE_USER", "DATABASE_PASSWORD"]
 }
