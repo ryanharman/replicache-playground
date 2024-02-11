@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "f0ec1cae-3172-4579-b844-bab13aa568e9",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "41ca486e-2c4e-4d5c-a0b6-8416c5b7b925",
+  "prevId": "db3c766f-139b-4c43-88ea-d30910044d29",
   "tables": {
     "replicache_replicache_client": {
       "name": "replicache_replicache_client",
@@ -123,21 +123,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "replicache_replicache_client_group_space_id_replicache_replicache_space_id_fk": {
-          "name": "replicache_replicache_client_group_space_id_replicache_replicache_space_id_fk",
-          "tableFrom": "replicache_replicache_client_group",
-          "tableTo": "replicache_replicache_space",
-          "columnsFrom": [
-            "space_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {
         "replicache_replicache_client_group_id": {
           "name": "replicache_replicache_client_group_id",
@@ -245,7 +231,7 @@
         },
         "title": {
           "name": "title",
-          "type": "char(256)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -260,21 +246,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "replicache_todo_space_id_replicache_replicache_space_id_fk": {
-          "name": "replicache_todo_space_id_replicache_replicache_space_id_fk",
-          "tableFrom": "replicache_todo",
-          "tableTo": "replicache_replicache_space",
-          "columnsFrom": [
-            "space_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {
         "replicache_todo_id": {
           "name": "replicache_todo_id",

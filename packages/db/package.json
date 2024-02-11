@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "generate": "pnpm with-env drizzle-kit generate:mysql",
+    "db:generate": "pnpm with-env drizzle-kit generate:mysql",
     "db:push": "pnpm with-env drizzle-kit push:mysql",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .ts",

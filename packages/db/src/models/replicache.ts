@@ -1,21 +1,14 @@
 import { bigint, char, int } from "drizzle-orm/mysql-core";
-import { timestamps, mysqlTable } from "../helpers";
+import { timestamps, mysqlTable, space_id } from "../helpers";
+import { relations } from "drizzle-orm";
 
 // https://doc.replicache.dev/strategies/per-space-version
 
 const replicache_space = mysqlTable("replicache_space", {
   id: char("id", { length: 36 }).notNull().primaryKey(),
-  version: int("version").notNull(),
+  version: int("version").notNull().default(0),
   ...timestamps,
 });
-
-const space_id = {
-  get space_id() {
-    return char("space_id", { length: 36 })
-      .references(() => replicache_space.id)
-      .notNull();
-  },
-};
 
 const replicache_client_group = mysqlTable("replicache_client_group", {
   id: char("id", { length: 36 }).notNull().primaryKey(),
@@ -37,9 +30,16 @@ const replicache_client = mysqlTable("replicache_client", {
   ...timestamps,
 });
 
+const replicache_client_relations = relations(replicache_client, ({ one }) => ({
+  clientGroup: one(replicache_client_group, {
+    fields: [replicache_client.clientGroupID],
+    references: [replicache_client_group.id],
+  }),
+}));
+
 export {
   replicache_space,
-  space_id,
   replicache_client_group,
   replicache_client,
+  replicache_client_relations,
 };

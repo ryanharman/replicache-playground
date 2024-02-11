@@ -1,13 +1,18 @@
-import { space_id } from "./replicache";
-import { mysqlTable, timestamps, id } from "../helpers";
-import { char, boolean } from "drizzle-orm/mysql-core";
+import { relations } from "drizzle-orm";
+import { mysqlTable, timestamps, id, space_id } from "../helpers";
+import { text, boolean } from "drizzle-orm/mysql-core";
+import { replicache_space } from "./replicache";
 
 const todo = mysqlTable("todo", {
   ...id,
   ...timestamps,
   ...space_id,
-  title: char("title", { length: 256 }).notNull(),
+  title: text("title").notNull(),
   completed: boolean("completed").notNull().default(false),
 });
 
-export { todo };
+const todo_relations = relations(todo, ({ many }) => ({
+  client_space: many(replicache_space),
+}));
+
+export { todo, todo_relations };

@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "mysql",
-  "id": "f0ec1cae-3172-4579-b844-bab13aa568e9",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "db3c766f-139b-4c43-88ea-d30910044d29",
+  "prevId": "f0ec1cae-3172-4579-b844-bab13aa568e9",
   "tables": {
     "replicache_replicache_client": {
       "name": "replicache_replicache_client",
@@ -245,7 +245,7 @@
         },
         "title": {
           "name": "title",
-          "type": "char(256)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false

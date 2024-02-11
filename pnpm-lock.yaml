@@ -47,12 +47,18 @@ importers:
 
   apps/api:
     dependencies:
+      '@playground/db':
+        specifier: workspace:*
+        version: link:../../packages/db
       cors:
         specifier: ^2.8.5
         version: 2.8.5
       express:
         specifier: ^4.18.2
         version: 4.18.2
+      replicache:
+        specifier: ^14.1.0
+        version: 14.1.0
     devDependencies:
       '@types/cors':
         specifier: ^2.8.17

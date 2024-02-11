@@ -28,4 +28,10 @@ const id = {
   },
 };
 
-export { mysqlTable, id, cuid, timestamps };
+const space_id = {
+  get space_id() {
+    return char("space_id", { length: 36 }).notNull();
+  },
+};
+
+export { mysqlTable, id, cuid, timestamps, space_id };

@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon src/index.ts",
     "type-check": "tsc --noEmit",
@@ -13,8 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@playground/db": "workspace:*",
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "replicache": "^14.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
