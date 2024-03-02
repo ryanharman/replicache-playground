@@ -1,23 +1,31 @@
-import { sql } from "drizzle-orm";
 import z from "zod";
 import { zod } from "../utils/zod";
 import { db } from "../index";
 import { todo } from "../schema";
 
-const updateTodo = zod(
+const upsertTodo = zod(
   z.object({
     id: z.string(),
     title: z.string(),
     completed: z.boolean(),
+    spaceId: z.string(),
   }),
   async (input) =>
     await db
-      .update(todo)
-      .set({
+      .insert(todo)
+      .values({
+        id: input.id,
         title: input.title,
         completed: input.completed,
+        space_id: input.spaceId,
       })
-      .where(sql`id = ${input.id}`),
+      .onDuplicateKeyUpdate({
+        set: {
+          title: input.title,
+          completed: input.completed,
+          space_id: input.spaceId,
+        },
+      }),
 );
 
-export { updateTodo };
+export { upsertTodo };

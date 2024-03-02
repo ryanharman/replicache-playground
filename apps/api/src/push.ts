@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { db, eq, inArray } from "@playground/db";
 import {
   getCurrentSpaceVersion,
@@ -9,6 +6,7 @@ import {
 import { replicache_space, replicache_client } from "@playground/db/src/schema";
 import { type Response, type Request } from "express";
 import { type PushRequestV1 } from "replicache";
+import { replicacheMutations } from "./replicacheFramework.js";
 
 async function pushHandler(
   req: Request<unknown, unknown, PushRequestV1>,
@@ -67,38 +65,9 @@ async function pushHandler(
       }
 
       try {
-        await db.transaction(async (tx) => {
-          const { clientID, args, name } = mutation;
-          // @ts-expect-error - we cant know for sure if this table is valid, but we check below
-          const tableToUpdateFromSchema = tx._.schema[name];
-
-          if (!tableToUpdateFromSchema) {
-            throw new Error(`Unknown table ${name}`);
-          }
-
-          // 🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
-
-          // TODO: This is where we need to expose our
-          // "server mutators" that we can use to update
-          // the database.
-
-          // This wont actually work, we need to declare our own
-          // upsert function that is based on the name
-          const updatedTable = await tx
-            .update(tableToUpdateFromSchema)
-            .set(args as any)
-            .where(eq(tableToUpdateFromSchema.id, mutation.id));
-
-          // 🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧🚧
-
-          await tx
-            .update(replicache_client)
-            .set({ lastMutationID: expectedMutationID })
-            .where(eq(replicache_client.id, clientID));
-
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-          return updatedTable;
-        });
+        const { args, name } = mutation;
+        const updatedTable = await replicacheMutations.execute(name, args);
+        return updatedTable;
       } catch (e) {
         console.error(e);
       }

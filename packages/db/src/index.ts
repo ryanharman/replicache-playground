@@ -16,5 +16,8 @@ const db = drizzle(connection, {
   logger: process.env.DRIZZLE_LOG === "true",
 });
 
+type SchemaNames = keyof typeof schema;
+
 export { db, schema, core };
+export type { SchemaNames };
 export * from "drizzle-orm";

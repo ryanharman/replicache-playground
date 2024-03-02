@@ -1,0 +1,25 @@
+{
+  "name": "@playground/replicache",
+  "version": "0.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --ext .ts",
+    "clearnodemodules": "rm -rf node_modules",
+    "with-env": "dotenv -e ../../.env --"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@playground/db": "workspace:*",
+    "typescript": "^5.3.3",
+    "zod": "^3.22.4",
+    "replicache": "^14.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^18.17.0",
+    "dotenv-cli": "^7.3.0"
+  }
+}
