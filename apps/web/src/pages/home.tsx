@@ -16,7 +16,7 @@ function Home() {
     await rep().mutate.upsertTodo({
       title: inputValue(),
       completed: false,
-      spaceId: "default",
+      spaceId: "1",
     });
   }
 

@@ -9,7 +9,7 @@ const connection = {
 export default defineConfig({
   out: "./migrations/",
   strict: true,
-  schema: "./src/models/*.ts",
+  schema: "./src/schema/*.ts",
   verbose: true,
   driver: "mysql2",
   dbCredentials: {

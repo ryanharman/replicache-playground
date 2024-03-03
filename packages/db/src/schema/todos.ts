@@ -11,8 +11,12 @@ const todo = mysqlTable("todo", {
   completed: boolean("completed").notNull().default(false),
 });
 
-const todo_relations = relations(todo, ({ many }) => ({
-  client_space: many(replicache_space),
+const todo_relations = relations(todo, ({ one }) => ({
+  space_id: one(replicache_space, {
+    fields: [todo.space_id],
+    references: [replicache_space.id],
+    relationName: "space",
+  }),
 }));
 
 export { todo, todo_relations };

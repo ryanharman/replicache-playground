@@ -14,7 +14,7 @@ function createReplicache(workspace?: string) {
     name: workspace ?? "NO_WORKSPACE_PROVIDED",
     licenseKey: "l9339e433719b4fe6b77126c0ea281db7",
     // pullURL: "http://localhost:3001/pull",
-    // pushURL: "http://localhost:3001/push",
+    // pushURL: "http://localhost:3001/push?spaceID=1",
     pushDelay: 5000,
     pullInterval: 10000,
     mutators,
