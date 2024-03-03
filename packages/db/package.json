@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "main": "src/index.ts",
+  "type": "module",
   "scripts": {
     "db:generate": "pnpm with-env drizzle-kit generate:mysql",
     "db:push": "pnpm with-env drizzle-kit push:mysql",
@@ -15,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
     "@planetscale/database": "^1.16.0",
     "drizzle-orm": "^0.29.3",
     "drizzle-zod": "^0.5.1",
@@ -23,7 +25,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.17.0",
-    "drizzle-kit": "^0.20.14",
-    "dotenv-cli": "^7.3.0"
+    "dotenv-cli": "^7.3.0",
+    "drizzle-kit": "^0.20.14"
   }
 }

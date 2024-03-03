@@ -1,5 +1,5 @@
 import { Replicache } from "replicache";
-import { mutators } from "../data";
+import { mutators } from "@playground/replicache/src/client";
 import {
   type ParentProps,
   createMemo,

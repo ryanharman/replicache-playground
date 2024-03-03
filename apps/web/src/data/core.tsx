@@ -1,8 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { createStore } from "solid-js/store";
 import { useReplicache } from "../providers";
 import { type Replicache } from "replicache";
-import { type M } from "./mutators";
 import { createMemo } from "solid-js";
+import { type Mutators } from "@playground/replicache/src/client";
+import { type SchemaNames } from "@playground/db";
+
+type StringWithAutocomplete<T> = T | (string & Record<never, never>);
+
+type ReplicacheStoreKeys = StringWithAutocomplete<SchemaNames>;
 
 /**
  * End goal of the subscribe function: we have an object
@@ -17,8 +24,8 @@ import { createMemo } from "solid-js";
  */
 
 type Args = {
-  key: string;
-  rep: () => Replicache<M>;
+  key: ReplicacheStoreKeys;
+  rep: () => Replicache<Mutators>;
 };
 
 function getReplicache<T>(args: Args) {
