@@ -1,9 +1,12 @@
-import { db, eq, inArray } from "@playground/db";
 import {
+  db,
+  eq,
+  inArray,
   getCurrentSpaceVersion,
   getLastMutationIDs,
-} from "@playground/db/src/core/replicache.js";
-import { replicache_space, replicache_client } from "@playground/db/src/schema";
+  replicache_space,
+  replicache_client,
+} from "@playground/db";
 import { type Response, type Request } from "express";
 import { type PushRequestV1 } from "replicache";
 import { serverMutators } from "@playground/replicache";

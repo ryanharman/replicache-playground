@@ -1,4 +1,4 @@
-import { upsertTodo } from "@playground/db/src/core";
+import { upsertTodo } from "@playground/db";
 import { Server } from "./framework/server";
 
 const serverMutators = new Server().expose("upsertTodo", upsertTodo);
