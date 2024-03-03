@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type ExtractMutations, type Mutation, type Server } from "./server";
 import { type WriteTransaction } from "replicache";
 

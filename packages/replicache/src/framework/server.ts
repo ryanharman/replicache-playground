@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type z, type ZodSchema } from "zod";
 
 interface Mutation<Name extends string = string, Input = any> {
@@ -36,6 +37,8 @@ class Server<Mutations> {
     return this;
   }
 
+  // This method allows us to invoke the mutation that we've
+  // declared on our server in the replicache push function
   public execute(name: string, args: unknown) {
     const mut = this.mutations.get(name);
     if (!mut) throw new Error(`Mutation "${name}" not found`);

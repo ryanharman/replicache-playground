@@ -2,6 +2,7 @@
   "name": "replicache-playground",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
     "dev": "turbo dev",
     "dev:web": "turbo dev --web",

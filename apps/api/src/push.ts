@@ -6,7 +6,7 @@ import {
 import { replicache_space, replicache_client } from "@playground/db/src/schema";
 import { type Response, type Request } from "express";
 import { type PushRequestV1 } from "replicache";
-import { replicacheMutations } from "./replicacheFramework.js";
+import { serverMutators } from "@playground/replicache";
 
 async function pushHandler(
   req: Request<unknown, unknown, PushRequestV1>,
@@ -66,7 +66,8 @@ async function pushHandler(
 
       try {
         const { args, name } = mutation;
-        const updatedTable = await replicacheMutations.execute(name, args);
+        console.log("Executing mutation", name, args);
+        const updatedTable = await serverMutators.execute(name, args);
         return updatedTable;
       } catch (e) {
         console.error(e);

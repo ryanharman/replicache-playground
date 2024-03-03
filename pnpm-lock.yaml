@@ -50,6 +50,9 @@ importers:
       '@playground/db':
         specifier: workspace:*
         version: link:../../packages/db
+      '@playground/replicache':
+        specifier: workspace:*
+        version: link:../../packages/replicache
       cors:
         specifier: ^2.8.5
         version: 2.8.5
