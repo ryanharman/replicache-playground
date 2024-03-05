@@ -5,6 +5,7 @@ import { useReplicache } from "../providers";
 function Home() {
   const rep = useReplicache();
   const todo = subscribe<{
+    id: string;
     title: string;
     completed: boolean;
     spaceId: string;
@@ -14,9 +15,10 @@ function Home() {
 
   async function onButtonClick() {
     await rep().mutate.upsertTodo({
+      id: todo()?.id,
       title: inputValue(),
       completed: false,
-      spaceId: "1",
+      spaceId: "cplf1ag6uyuluuor489pka0m",
     });
   }
 
@@ -26,6 +28,15 @@ function Home() {
 
   return (
     <div>
+      <button
+        onClick={async () => {
+          await fetch("http://localhost:3001/mock", {
+            method: "POST",
+          });
+        }}
+      >
+        press me to mock a client
+      </button>
       <h1>Home</h1>
       {todo()?.title}
       <input

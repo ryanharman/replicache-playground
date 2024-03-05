@@ -1,11 +1,11 @@
 import {
   db,
   eq,
-  inArray,
   getCurrentSpaceVersion,
   getLastMutationIDs,
   replicache_space,
   replicache_client,
+  replicache_client_group,
 } from "@playground/db";
 import { type Response, type Request } from "express";
 import { type PushRequestV1 } from "replicache";
@@ -26,6 +26,7 @@ async function pushHandler(
   }
 
   const spaceID = req.query.spaceID as string;
+  const clientGroupID = req.body.clientGroupID;
 
   const previousSpaceVersion = await getCurrentSpaceVersion(spaceID);
 
@@ -40,17 +41,12 @@ async function pushHandler(
 
   try {
     for (const mutation of push.mutations) {
+      const { args, name, clientID, id: mutationID } = mutation;
       const t1 = Date.now();
 
-      const lastMutationID = lastMutationIDPerClient.find(
-        (x) => x.id === mutation.clientID,
-      )?.lastMutationID;
-
-      if (lastMutationID === undefined) {
-        throw new Error(
-          `Unknown clientID ${mutation.clientID} in push request`,
-        );
-      }
+      const lastMutationID =
+        lastMutationIDPerClient.find((x) => x.id === mutation.clientID)
+          ?.lastMutationID ?? 0;
 
       const expectedMutationID = lastMutationID + 1;
 
@@ -68,27 +64,52 @@ async function pushHandler(
       }
 
       try {
-        const { args, name } = mutation;
         console.log("Executing mutation", name, args);
-        const updatedTable = await serverMutators.execute(name, args);
-        return updatedTable;
+        await serverMutators.execute(name, args);
       } catch (e) {
         console.error(e);
       }
+
+      console.log("Updating client tables", clientGroupID, clientID);
+      // If the user doesn't have an existing client group
+      // we create one. Same for the client table.
+      await db
+        .insert(replicache_client_group)
+        .values({
+          id: clientGroupID,
+          space_id: spaceID,
+          userID: "THIS NEEDS UPDATING",
+        })
+        .onDuplicateKeyUpdate({
+          set: {
+            userID: "THIS NEEDS UPDATING",
+            space_id: spaceID,
+          },
+        });
+      await db
+        .insert(replicache_client)
+        .values({
+          id: clientID,
+          clientGroupID: clientGroupID,
+          lastMutationID: mutationID,
+          lastModifiedVersion: nextVersion,
+        })
+        .onDuplicateKeyUpdate({
+          set: {
+            lastMutationID: mutationID,
+            lastModifiedVersion: nextVersion,
+          },
+        });
 
       console.log("Processed mutation", mutation, "in", Date.now() - t1, "ms");
     }
 
     // Once we process all mutations successfully, update the
-    // space version and client last modified version
+    // space version
     await db
       .update(replicache_space)
       .set({ version: nextVersion })
       .where(eq(replicache_space.id, spaceID));
-    await db
-      .update(replicache_client)
-      .set({ lastModifiedVersion: nextVersion })
-      .where(inArray(replicache_client.id, clientIDs));
 
     res.send("{}");
     // TODO: Send a poke

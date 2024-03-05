@@ -7,7 +7,7 @@ import { type WriteTransaction } from "replicache";
 // might be something that can be handled with a generic replicache framework that is
 // then built into Solids lifecycle/createStore/createSignal fns?
 
-type MutationsObject<S extends Server<any>> = Record<
+type MutationsArgsObject<S extends Server<any>> = Record<
   ExtractMutations<S>[keyof ExtractMutations<S>]["name"],
   (
     tx: WriteTransaction,
@@ -25,7 +25,7 @@ type ClientMutationsResult<Mutations extends Record<string, Mutation>> = {
 function createClientMutations<
   S extends Server<any>,
   Mutations extends Record<string, Mutation> = ExtractMutations<S>,
->(mutations: MutationsObject<S>) {
+>(mutations: MutationsArgsObject<S>) {
   const mutationsForMap = Object.entries(mutations).map(([key, value]) => [
     key,
     value,
