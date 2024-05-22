@@ -1,7 +1,8 @@
-import { char, timestamp, mysqlTableCreator } from "drizzle-orm/mysql-core";
+import { char, timestamp } from "drizzle-orm/pg-core";
 import { sql } from "drizzle-orm";
+import { pgTableCreator } from "drizzle-orm/pg-core";
 
-const mysqlTable = mysqlTableCreator((name) => `replicache_${name}`);
+const pgTable = pgTableCreator((name) => `replicache_${name}`);
 
 const timestamps = {
   timeCreated: timestamp("time_created", {
@@ -13,8 +14,7 @@ const timestamps = {
     mode: "string",
   })
     .notNull()
-    .default(sql`CURRENT_TIMESTAMP`)
-    .onUpdateNow(),
+    .default(sql`CURRENT_TIMESTAMP`),
   timeDeleted: timestamp("time_deleted", {
     mode: "string",
   }),
@@ -34,4 +34,4 @@ const space_id = {
   },
 };
 
-export { mysqlTable, id, cuid, timestamps, space_id };
+export { pgTable, id, cuid, timestamps, space_id };

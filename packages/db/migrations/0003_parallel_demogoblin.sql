@@ -1,1 +1,0 @@
-ALTER TABLE `replicache_replicache_space` MODIFY COLUMN `version` int NOT NULL DEFAULT 0;

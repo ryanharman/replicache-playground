@@ -1,9 +1,9 @@
 import { relations } from "drizzle-orm";
-import { mysqlTable, timestamps, id, space_id } from "../utils/schema-helpers";
-import { text, boolean } from "drizzle-orm/mysql-core";
+import { pgTable, timestamps, id, space_id } from "../utils/schema-helpers";
+import { text, boolean } from "drizzle-orm/pg-core";
 import { replicache_space } from "./replicache";
 
-const todo = mysqlTable("todo", {
+const todo = pgTable("todo", {
   ...id,
   ...timestamps,
   ...space_id,

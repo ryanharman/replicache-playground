@@ -5,8 +5,8 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "db:generate": "pnpm with-env drizzle-kit generate:mysql",
-    "db:push": "pnpm with-env drizzle-kit push:mysql",
+    "db:generate": "pnpm with-env drizzle-kit generate:pg",
+    "db:push": "pnpm with-env drizzle-kit push:pg",
     "db:studio": "pnpm with-env drizzle-kit studio",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .ts",
@@ -17,11 +17,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@neondatabase/serverless": "^0.9.3",
     "@paralleldrive/cuid2": "^2.2.2",
-    "@planetscale/database": "^1.16.0",
     "drizzle-orm": "^0.29.3",
     "drizzle-zod": "^0.5.1",
-    "mysql2": "^3.9.2",
     "typescript": "^5.3.3",
     "zod": "^3.22.4"
   },

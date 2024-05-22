@@ -1,1 +1,0 @@
-ALTER TABLE `replicache_todo` MODIFY COLUMN `title` text NOT NULL;

@@ -1,33 +1,12 @@
 {
   "version": "5",
-  "dialect": "mysql",
+  "dialect": "pg",
   "entries": [
     {
       "idx": 0,
       "version": "5",
-      "when": 1707674406060,
-      "tag": "0000_known_living_lightning",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1707674470836,
-      "tag": "0001_overjoyed_cassandra_nova",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1707674823571,
-      "tag": "0002_confused_selene",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1709474549603,
-      "tag": "0003_parallel_demogoblin",
+      "when": 1716376313607,
+      "tag": "0000_condemned_fixer",
       "breakpoints": true
     }
   ]

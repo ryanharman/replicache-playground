@@ -3,7 +3,7 @@ import { createClientMutations } from "./client";
 
 const mutators = createClientMutations<ServerType>({
   upsertTodo: async (tx, args) => {
-    return await tx.set("todo", args);
+    return await tx.set(`todo/${args.id}`, args);
   },
 });
 

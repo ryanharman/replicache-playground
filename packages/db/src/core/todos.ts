@@ -2,11 +2,10 @@ import z from "zod";
 import { zod } from "../utils/zod";
 import { db } from "../index";
 import { todo } from "../schema";
-import { createId } from "@paralleldrive/cuid2";
 
 const upsertTodo = zod(
   z.object({
-    id: z.string().optional(),
+    id: z.string(),
     title: z.string(),
     completed: z.boolean(),
     spaceId: z.string(),
@@ -15,12 +14,13 @@ const upsertTodo = zod(
     await db
       .insert(todo)
       .values({
-        id: input.id ?? createId(),
+        id: input.id,
         title: input.title,
         completed: input.completed,
         space_id: input.spaceId,
       })
-      .onDuplicateKeyUpdate({
+      .onConflictDoUpdate({
+        target: [todo.id],
         set: {
           title: input.title,
           completed: input.completed,

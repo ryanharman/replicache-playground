@@ -5,7 +5,7 @@ import { Home } from "./pages";
 
 const App: Component = () => {
   return (
-    <ReplicacheProvider>
+    <ReplicacheProvider workspace="ryans-workspace">
       <Home />
     </ReplicacheProvider>
   );

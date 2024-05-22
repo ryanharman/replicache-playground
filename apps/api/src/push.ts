@@ -80,10 +80,11 @@ async function pushHandler(
           space_id: spaceID,
           userID: "THIS NEEDS UPDATING",
         })
-        .onDuplicateKeyUpdate({
+        .onConflictDoUpdate({
+          target: [replicache_client_group.id],
           set: {
-            userID: "THIS NEEDS UPDATING",
             space_id: spaceID,
+            userID: "THIS NEEDS UPDATING",
           },
         });
       await db
@@ -94,13 +95,13 @@ async function pushHandler(
           lastMutationID: mutationID,
           lastModifiedVersion: nextVersion,
         })
-        .onDuplicateKeyUpdate({
+        .onConflictDoUpdate({
+          target: [replicache_client.id],
           set: {
             lastMutationID: mutationID,
             lastModifiedVersion: nextVersion,
           },
         });
-
       console.log("Processed mutation", mutation, "in", Date.now() - t1, "ms");
     }
 

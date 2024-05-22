@@ -23,6 +23,7 @@
     "@playground/replicache": "workspace:*",
     "@solid-primitives/event-listener": "^2.3.1",
     "replicache": "^14.1.0",
-    "solid-js": "^1.8.11"
+    "solid-js": "^1.8.11",
+    "@paralleldrive/cuid2": "^2.2.2"
   }
 }
